@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instrument Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+    <div id="addnew" class="hide">
+        <div id="addnewcontainer">
+            <h2>New Instrument:</h2>
+            <p>Instrument type (optional): <input v-model="form.type" type="text" placeholder="instrument type(optional)" /></p>
+            <p>Instrument name (required): <input v-model="form.name" type="text" placeholder="instrument name" /></p>
+            <p>Price (optional): <input v-model="form.price" type="text" placeholder="price (optional)" /></p>
+            <p>Brand (optional):
+            <input type="radio" id="Maton" value="Maton" v-model="form.brand" />
+            <label for="Maton">Maton</label>
+            <input type="radio" id="Yamaha" value="Yamaha" v-model="form.brand" />
+            <label for="Yamaha">Yamaha</label>
+            <input type="radio" id="Fender" value="Fender" v-model="form.brand" />
+            <label for="Fender">Fender</label></p>
+            <p><button v-on:click="newpop()">Cancel</button>
+            <button v-on:click="submit()">Submit</button></p>
+            <div id="message"></div>
+        </div>
+    </div>
+    <div id="cart">
+        <button v-on:click="newpop()">Add New Instrument</button>
+        <button v-on:click="empty()">Cart: {{cart.num}}</button>
+    </div>
+    <div id="instruments">
+        <product v-for="(inst,index) in instruments" v-bind:name="inst.name" v-bind:type="inst.type" v-bind:brand="inst.brand" v-bind:img="inst.img" v-bind:price="inst.price" v-bind:index="index"></product>
+    </div>
+    <popcomp v-bind:name="popdata.name" v-bind:brand="popdata.brand" v-bind:img="popdata.img" v-bind:price="popdata.price"></popcomp>
+    <p v-if="instruments.length==0">Store is Empty</p>
+</div>
+
+<script src="vue.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
